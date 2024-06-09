@@ -97,5 +97,3 @@ Este proyecto está bajo la Licencia [MIT](https://opensource.org/licenses/MIT).
 
 La Licencia MIT es una de las licencias de código abierto más permisivas y populares. Permite el uso, modificación y distribución del software de forma gratuita, con la única condición de incluir la notificación de derechos de autor y la exención de responsabilidad en todas las copias o porciones sustanciales del software. Esta licencia es adecuada para proyectos de código abierto que no tienen restricciones específicas y que permiten el uso comercial, la modificación y la distribución del código fuente sin requerimientos adicionales.
 ```
-
-Esta versión del README es más clara y completa, e incluye instrucciones detalladas sobre la instalación, el uso de la API y la nueva funcionalidad de paginación de usuarios. Además, el ejemplo de uso con `curl` ayuda a los usuarios a entender cómo realizar solicitudes autenticadas.
