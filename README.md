@@ -1,4 +1,4 @@
-![logo]([https://i3.wp.com/raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA))
+![logo](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA)
 # GoApiRestFull
 
 ```markdown
