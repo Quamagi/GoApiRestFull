@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -53,8 +54,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-//funcion login para el acceso de ususarios
-
+// Función login para el acceso de usuarios
 func login(w http.ResponseWriter, r *http.Request) {
 	var creds struct {
 		Email    string `json:"email"`
@@ -154,14 +154,24 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
-	_, err := ValidateToken(r)
-	if err != nil {
-		http.Error(w, "Acceso no autorizado", http.StatusUnauthorized)
+	var users []User
+	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
+	if page < 1 {
+		page = 1
+	}
+	pageSize, _ := strconv.Atoi(r.URL.Query().Get("pageSize"))
+	if pageSize < 1 {
+		pageSize = 10
+	}
+	offset := (page - 1) * pageSize
+
+	result := DB.Limit(pageSize).Offset(offset).Find(&users)
+	if result.Error != nil {
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	var users []User
-	DB.Find(&users)
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
 }
 
