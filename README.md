@@ -1,8 +1,5 @@
-Aquí tienes una versión actualizada del README, que incluye información sobre la paginación de usuarios. También he mejorado la estructura y la claridad general del documento:
-
-```markdown
 ![logo](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA)
-
+```markdown
 # GoApiRestFull
 
 ## API REST en Go con autenticación JWT
