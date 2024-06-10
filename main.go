@@ -42,7 +42,8 @@ func main() {
 	router.HandleFunc("/users/{id}", getUser).Methods("GET")
 	router.HandleFunc("/users/{id}", updateUser).Methods("PUT")
 	router.HandleFunc("/users/{id}", deleteUser).Methods("DELETE")
-	router.HandleFunc("/login", login).Methods("POST") // Añadida la ruta /login
+	router.HandleFunc("/login", login).Methods("POST")
+	router.HandleFunc("/api/v1/paginate/{entity}", paginateHandler).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
@@ -54,7 +55,6 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-// Función login para el acceso de usuarios
 func login(w http.ResponseWriter, r *http.Request) {
 	var creds struct {
 		Email    string `json:"email"`
@@ -155,17 +155,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	var users []User
-	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
-	if page < 1 {
-		page = 1
-	}
-	pageSize, _ := strconv.Atoi(r.URL.Query().Get("pageSize"))
-	if pageSize < 1 {
-		pageSize = 10
-	}
-	offset := (page - 1) * pageSize
-
-	result := DB.Limit(pageSize).Offset(offset).Find(&users)
+	result := DB.Find(&users)
 	if result.Error != nil {
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 		return
@@ -240,4 +230,55 @@ func HashPassword(password string) (string, error) {
 func CheckPasswordHash(password, hashedPassword string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 	return err == nil
+}
+
+func paginateHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	entity := vars["entity"]
+	limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	if err != nil {
+		http.Error(w, "Invalid limit", http.StatusBadRequest)
+		return
+	}
+	if limit <= 0 {
+		limit = 10
+	}
+	cursor := r.URL.Query().Get("cursor")
+	if cursor == "" {
+		cursor = "0"
+	}
+
+	var results []User
+	var nextCursor string
+
+	switch entity {
+	case "users":
+		var lastUser User
+		if cursor != "0" {
+			if err := DB.Where("id > ?", cursor).Order("id").Limit(limit).Find(&results).Error; err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		} else {
+			if err := DB.Order("id").Limit(limit).Find(&results).Error; err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		}
+		if len(results) > 0 {
+			lastUser = results[len(results)-1]
+			nextCursor = strconv.Itoa(int(lastUser.ID))
+		}
+	default:
+		http.Error(w, "Entidad no soportada", http.StatusBadRequest)
+		return
+	}
+
+	response := map[string]interface{}{
+		"results":    results,
+		"nextCursor": nextCursor,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
