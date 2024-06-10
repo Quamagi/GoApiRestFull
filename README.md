@@ -1,5 +1,9 @@
 ![logo](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA)
 
+Para agregar tu código de Ko-fi al README de tu repositorio de GitHub, puedes incluirlo en una sección dedicada a las donaciones o soporte. Sin embargo, ten en cuenta que el código HTML y JavaScript no se ejecutará directamente en un archivo README.md en GitHub, ya que Markdown no soporta la ejecución de scripts. Puedes proporcionar el código como referencia para que los visitantes lo agreguen a su propio sitio web.
+
+Aquí tienes un ejemplo de cómo puedes hacerlo en tu README.md:
+
 ```markdown
 # GoApiRestFull
 
@@ -130,27 +134,15 @@ curl -X DELETE "http://localhost:8080/users/1" -H "Authorization: Bearer <token_
 
 Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio y envía un pull request con tus cambios.
 
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
 ## Apóyame en Ko-fi
 
 Si encuentras útil este proyecto y deseas apoyarme, puedes hacerlo a través de Ko-fi:
 
-```html
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-  kofiWidgetOverlay.draw('quamagi', {
-    'type': 'floating-chat',
-    'floating-chat.donateButton.text': 'Support me',
-    'floating-chat.donateButton.background-color': '#794bc4',
-    'floating-chat.donateButton.text-color': '#fff'
-  });
-</script>
+<a href='https://ko-fi.com/quamagi' target='_blank'>
+<img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+</a>
 
-```
+## Licencia
 
-De esta forma, los visitantes de tu repositorio verán el código de Ko-fi y podrán incluirlo en sus propios sitios web si así lo desean.
---- 
-La Licencia MIT es una de las licencias de código abierto más permisivas y populares. Permite el uso, modificación y distribución del software de forma gratuita, con la única condición de incluir la notificación de derechos de autor y la exención de responsabilidad en todas las copias o porciones sustanciales del software. Esta licencia es adecuada para proyectos de código abierto que no tienen restricciones específicas y que permiten el uso comercial, la modificación y la distribución del código fuente sin requerimientos adicionales.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
