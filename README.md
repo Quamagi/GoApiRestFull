@@ -1,5 +1,4 @@
 ![logo](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA)
-```markdown
 Claro, aquí tienes el texto corregido y formateado en Markdown para GitHub:
 
 # GoApiRestFull
@@ -27,7 +26,7 @@ Esta es una API REST construida en Go con autenticación utilizando JSON Web Tok
 1. Clona este repositorio en tu máquina local:
 
     ```bash
-    git clone https://github.com/tu-usuario/api-rest-go.git
+    git clone https://github.com/Quamagi/api-rest-go.git
     ```
 
 2. Navega al directorio del proyecto:
@@ -62,13 +61,14 @@ La API proporciona los siguientes endpoints:
 - `PUT /users/:id`: Actualiza un usuario por su ID (requiere autenticación)
 - `DELETE /users/:id`: Elimina un usuario por su ID (requiere autenticación)
 - `POST /login`: Inicia sesión y obtiene un token JWT
+- `GET /paginate/users`: Obtiene una lista paginada de usuarios (requiere autenticación)
 
 ### Paginación de Usuarios
 
-Para obtener una lista paginada de usuarios, usa los parámetros `limit` y `cursor` en la solicitud `GET /users`. Por ejemplo:
+Para obtener una lista paginada de usuarios, usa los parámetros `limit` y `cursor` en la solicitud `GET /paginate/users`. Por ejemplo:
 
 ```bash
-curl -X GET "http://localhost:8080/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
+curl -X GET "http://localhost:8080/paginate/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
 ```
 
 ### Ejemplo de solicitudes
@@ -95,7 +95,13 @@ curl -X POST "http://localhost:8080/login" -H "Content-Type: application/json" -
 **Obtener lista de usuarios**
 
 ```bash
-curl -X GET "http://localhost:8080/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
+curl -X GET "http://localhost:8080/users" -H "Authorization: Bearer <token_jwt>"
+```
+
+**Obtener lista paginada de usuarios**
+
+```bash
+curl -X GET "http://localhost:8080/paginate/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
 ```
 
 **Obtener un usuario por ID**
@@ -129,6 +135,5 @@ Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
 ---
-
 
 La Licencia MIT es una de las licencias de código abierto más permisivas y populares. Permite el uso, modificación y distribución del software de forma gratuita, con la única condición de incluir la notificación de derechos de autor y la exención de responsabilidad en todas las copias o porciones sustanciales del software. Esta licencia es adecuada para proyectos de código abierto que no tienen restricciones específicas y que permiten el uso comercial, la modificación y la distribución del código fuente sin requerimientos adicionales.
