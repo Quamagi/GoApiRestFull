@@ -1,5 +1,7 @@
 ![logo](https://raw.githubusercontent.com/Quamagi/GoApiRestFull/main/logo.jpg?token=GHSAT0AAAAAACSTN3V4AHGEMGG2M3XGLB6YZTE72ZA)
 ```markdown
+Claro, aquí tienes el texto corregido y formateado en Markdown para GitHub:
+
 # GoApiRestFull
 
 ## API REST en Go con autenticación JWT
@@ -63,36 +65,70 @@ La API proporciona los siguientes endpoints:
 
 ### Paginación de Usuarios
 
-Para obtener una lista paginada de usuarios, usa los parámetros `page` y `pageSize` en la solicitud `GET /users`. Por ejemplo:
+Para obtener una lista paginada de usuarios, usa los parámetros `limit` y `cursor` en la solicitud `GET /users`. Por ejemplo:
 
 ```bash
-curl -X GET "http://localhost:8080/users?page=1&pageSize=10" -H "Authorization: Bearer <token_jwt>"
+curl -X GET "http://localhost:8080/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
 ```
 
-### Autenticación
+### Ejemplo de solicitudes
 
-Para las solicitudes que requieren autenticación, incluye el token JWT en el encabezado `Authorization` de la siguiente manera:
+**Crear un usuario**
 
-```plaintext
-Authorization: Bearer <token_jwt>
+```bash
+curl -X POST "http://localhost:8080/users" -H "Content-Type: application/json" -d '{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "password123"
+}'
 ```
 
-## Ejemplo de uso con `curl`
+**Iniciar sesión**
 
-1. Iniciar sesión para obtener un token JWT:
+```bash
+curl -X POST "http://localhost:8080/login" -H "Content-Type: application/json" -d '{
+    "email": "johndoe@example.com",
+    "password": "password123"
+}'
+```
 
-    ```bash
-    curl -X POST "http://localhost:8080/login" -d '{"username":"tu-usuario","password":"tu-contraseña"}'
-    ```
+**Obtener lista de usuarios**
 
-2. Usar el token JWT para obtener una lista paginada de usuarios:
+```bash
+curl -X GET "http://localhost:8080/users?limit=10&cursor=1" -H "Authorization: Bearer <token_jwt>"
+```
 
-    ```bash
-    curl -X GET "http://localhost:8080/users?page=1&pageSize=10" -H "Authorization: Bearer <token_jwt>"
-    ```
+**Obtener un usuario por ID**
+
+```bash
+curl -X GET "http://localhost:8080/users/1" -H "Authorization: Bearer <token_jwt>"
+```
+
+**Actualizar un usuario por ID**
+
+```bash
+curl -X PUT "http://localhost:8080/users/1" -H "Content-Type: application/json" -H "Authorization: Bearer <token_jwt>" -d '{
+    "name": "John Doe Updated",
+    "email": "johnupdated@example.com",
+    "password": "newpassword123"
+}'
+```
+
+**Eliminar un usuario por ID**
+
+```bash
+curl -X DELETE "http://localhost:8080/users/1" -H "Authorization: Bearer <token_jwt>"
+```
+
+## Contribución
+
+Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio y envía un pull request con tus cambios.
 
 ## Licencia
 
-Este proyecto está bajo la Licencia [MIT](https://opensource.org/licenses/MIT).
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+---
+
 
 La Licencia MIT es una de las licencias de código abierto más permisivas y populares. Permite el uso, modificación y distribución del software de forma gratuita, con la única condición de incluir la notificación de derechos de autor y la exención de responsabilidad en todas las copias o porciones sustanciales del software. Esta licencia es adecuada para proyectos de código abierto que no tienen restricciones específicas y que permiten el uso comercial, la modificación y la distribución del código fuente sin requerimientos adicionales.
